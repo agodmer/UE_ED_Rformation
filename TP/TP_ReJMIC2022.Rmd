@@ -1,0 +1,229 @@
+---
+title: "Tp Rejmic"
+author: "ReJMIC (N. Mohammad, A. Godmer)"
+date: '`r Sys.Date()`'
+output: 
+  html_document:
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Synopsis
+
+L'histoire de ce TP et les données proviennent d'un [article](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0101924) de Christner *et al.*.
+
+*Escherichia coli* O104:H4 producteur de shigatoxines (groupe phylogénétique B1 et ST678) est une bactérie avec des caractéristiques de virulence communes aux *E. coli* entéroagrégatifs (EAEC). Cette souche est très virulente et peut être responsable du syndrome hémolytique et urémique (SHU). Plusieurs épidémies ont été décrites en Europe mais la source n'a pas été clairement identifiée malgré des recherches intensives.
+
+En 2011, le nord de l'Allemagne a connu une importante épidémie d'*E.coli* Shiga-toxigène O104:H4. La grande quantité d'échantillons envoyés aux laboratoires de microbiologie pour l'évaluation épidémiologique a souligné l'importance de procédures de typage rapides et peu coûteuses.
+
+Nous utiliserons les fonctions de ce [tutoriel](http://www.sthda.com/french/articles/38-methodes-des-composantes-principales-dans-r-guide-pratique/73-acp-analyse-en-composantes-principales-avec-r-l-essentiel/).
+
+## 2. objectif
+
+Evaluer les performances de la spectrométrie de masse de type MALDI-TOF pour le typage d'un clone d'*Escherichia coli* Shiga-toxigène O104:H4
+
+## 3. Import des données
+
+GitHub est un service web d'hébergement et de gestion de développement de logiciels. Nous pouvons stocker des données dans un dossier appelé repository.
+
+Les données que nous allons utiliser pour ces travaux pratiques sont disponibles sur un repository [GitHub](https://agodmer.github.io/MSData/ShigaToxigenicEscherichia).
+
+Vous pouvez télécharger directment les données via un lien. Deux fichiers vont pouvoir être téléchargés (i) Une matrice d'intensité (RawIntensityMatrixChristner) et (ii) les métadata associées (MetadataShigatoxChristnermetadata).
+
+Les deux fichiers sont ont des formats différents: - RawIntensityMatrixChristner est un fichier en format `.csv` - MetadataShigatoxChristnermetadata est en fichier en format `.tsv`
+
+**Question :** quelle est la différence entre un fichier `.csv` et un fichier `.tsv` ? 
+
+**Réponse :**
+
+Nous allons utiliser le package R qui permet l'import de fichiers avec des formats différents.
+
+```{r library_import}
+#install.package("readr") #installation du package
+library("readr") # chargement des fonctions
+```
+
+Deux fonctions du package `readr` vont être utilisées pour importer les fichiers : `read_tsv()` et `read_csv()`. Vous pouvez regarder la documentation associée avec les commandes : `?read_tsv()` et `?read_csv()`
+
+```{r data_import}
+
+# (i) Téléchargement de la matrice d'intensité
+
+## utilisation de la fonction url pour ouvrir ou fermer une connection
+urlfileMatrix <- url("https://raw.githubusercontent.com/agodmer/MSData/main/ShigaToxigenicEscherichia/RawIntensityMatrixChristnerSN3.tsv")
+
+## Utilisation de la fonction read_tsv
+IntensityMatrixShigatox <- read_tsv(urlfileMatrix)
+
+# (ii) Téléchargement des métadata associées
+
+urlfileMetadata <- url("https://raw.githubusercontent.com/agodmer/MSData/main/ShigaToxigenicEscherichia/MetadataShigatoxChristner.csv")
+
+## Utilisation de la fonction read_tsv
+MetadataMatrixShigatox <- read_csv(urlfileMetadata)
+```
+
+## 4. Analyse descriptive des données (comprendre ses données) :
+
+**Question :** A l'aide de la fonction `dim()`, déterminer le nombre de colones et de lignes pour chacun des deux tableaux téléchargés.
+
+```{r dim1}
+## table dimension
+dim(IntensityMatrixShigatox)
+```
+
+**Réponse :** La matrice d'intensités contient : `X` colones et `Y` lignes
+
+```{r dim2}
+## table dimension
+dim(MetadataMatrixShigatox)
+```
+
+**Réponse :** Le tableau des métadadonnées contient : `X` colones et `Y` lignes
+
+En sachant que le nombre de lignes pour la matrice d'intensités correspond au nombres d'échantillons (spectre). Ce résutat est-il cohérent avec le fichier de métadonnées associées ?
+
+**Réponse :**
+
+-   Représentation sous forme d'un histogramme avec la fonction `hist()`:
+
+```{r hist_plot}
+## Unlist the data in a signe vector
+Hist.data <- unlist(IntensityMatrixShigatox)
+
+## Plot hist (ugly graph)
+hist(Hist.data)
+
+```
+
+**Votre analyse :** 
+
+-   Tapez `?hist` pour obtenir la page d'aide de la fonction
+
+```{r}
+## Beatutiful plot
+
+```
+
+## 5. Analyse par composante principale
+
+```{r install_library_PCA}
+## Install packages
+#install.packages(c("FactoMineR", "factoextra"))
+
+## load
+library("FactoMineR")
+library("factoextra")
+```
+
+### 5.1 : Avec les données brutes (raw data)
+
+```{r PCA_rawdata}
+## Easy PCA no scale
+res.pca.raw <- PCA(IntensityMatrixShigatox, scale.unit = FALSE, graph = FALSE)
+
+
+## Plot variance results
+fviz_eig(res.pca.raw, addlabels = TRUE, ylim = c(0, 100))
+```
+
+**Question :** Quelle est la variance résumée par les deux premières composantes principales ?
+
+**Réponse :**
+
+```{r PCA_plot_raw_data1to2}
+## Plot PCA
+#### Axes 1 et 2
+fviz_pca_ind(res.pca.raw,
+             geom.ind = "point", # show points only (nbut not "text")
+             col.ind = MetadataMatrixShigatox$Toxigenic_status, # color by groups
+             palette = c("blue", "red", "green", "black"),
+             addEllipses = TRUE, # Concentration ellipses
+             legend.title = "Groups"
+             )
+```
+
+```{r PCA_plot_raw_data2to3}
+## Plot PCA
+#### Axes 2 et 3
+fviz_pca_ind(res.pca.raw,
+             geom.ind = "point", # show points only (nbut not "text")
+             axes = c(2, 3),
+             col.ind = MetadataMatrixShigatox$Toxigenic_status, # color by groups
+             palette = c("blue", "red", "green", "black"),
+             addEllipses = TRUE, # Concentration ellipses
+             legend.title = "Groups"
+             )
+```
+
+```{r variance_axes_rawdata}
+fviz_contrib(res.pca.raw,
+             choice = "var",
+             axes = 1:2,
+             top = 10)
+```
+
+```{r rawdata_biplot}
+fviz_pca_biplot (res.pca.raw,
+                 col.ind = MetadataMatrixShigatox$Toxigenic_status,
+                 palette = "jco",
+                 addEllipses = TRUE,
+                 label = "var",
+                 col.var = "black",
+                 repel = TRUE,
+                 legend.title = "Species")
+```
+
+### 5.2 : Avec les données scalées
+
+```{r PCA_scaledata}
+## Easy PCA no scale
+res.pca.scale <- PCA(IntensityMatrixShigatox,
+                     scale.unit = TRUE,
+                     graph = FALSE)
+
+
+## Plot variance results
+fviz_eig(res.pca.scale,
+         addlabels = TRUE,
+         ylim = c(0, 100))
+```
+
+```{r PCA_plot_scaledata}
+## Plot PCA
+fviz_pca_ind(res.pca.scale,
+             geom.ind = "point", # show points only (nbut not "text")
+             col.ind = MetadataMatrixShigatox$Toxigenic_status, # color by groups
+             palette = c("blue", "red", "green", "black"),
+             addEllipses = TRUE, # Concentration ellipses
+             legend.title = "Groups"
+             )
+```
+
+```{r scaledata_contrib}
+fviz_contrib(res.pca.scale,
+             choice = "var",
+             axes = 1:2,
+             top = 10)
+```
+
+```{r scaledata_contrib2}
+fviz_pca_var(res.pca.scale,
+             col.var = "contrib",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07")
+             )
+```
+          
+```{r scaledataBiplot}
+fviz_pca_biplot (res.pca.scale,
+                col.ind = MetadataMatrixShigatox$Toxigenic_status,
+                palette = "jco",
+                addEllipses = TRUE, label = "var",
+                col.var = "black", repel = TRUE,
+                legend.title = "Species")
+```
+
+- **Question : ** Y avait-il un interêt à normaliser les données ? 
