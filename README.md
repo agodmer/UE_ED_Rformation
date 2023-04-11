@@ -20,3 +20,7 @@
 - **Quelques liens utiles pour les cours :**
   - [Markdown](https://blog.sqlbak.com/jupyter-notebook-markdown-cheatsheet)
   - [Rstudio](https://ourednik.info/maps/2019/03/14/premiers-pas-avec-r-et-rstudio/)
+
+<p align="left">
+  <img src="Images/Logo_Sorbonne_Universite.png" width="200" height="80">
+</p>
