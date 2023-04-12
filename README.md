@@ -24,3 +24,6 @@
 <p align="left">
   <img src="Images/Logo_Sorbonne_Universite.png" width="200" height="80">
 </p>
+
+
+### Travaux réalisés pour l'UE intelligence artificielle et médecine
