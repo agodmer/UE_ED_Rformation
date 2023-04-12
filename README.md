@@ -9,9 +9,9 @@
 ## Programme :
 |  Cours | Intervenants  | Liens  |
 |---     |---            |---     |
-|Introduction à R|Nohine mohammad|[cours intro_R](Cours/Cours_intro_R.pdf), [TP introduction R](https://agodmer.github.io/StatistiquesR_ReJMICJournee2/Cours/TP_intro_R_versionApprenants.html)|
+|Introduction à R|Nohine mohammad|[cours intro_R](Cours/Cours_intro_R.pdf), [TP introduction R](https://agodmer.github.io/UE_ED_Rformation/TP/TP_intro_R_versionApprenants.html)|
 |Decouverte de l'analyse en composantes principales|Alexandre Godmer|[cours PCA](Cours/AlexGodmer_cours_PCA.pdf)|   
-|Travaux pratiques|Noshine Mohammad, Alexandre Godmer|[TP PCA](TP/TP_PCA_UE_2023.Rmd), [en format html](https://agodmer.github.io/StatistiquesR_ReJMICJournee2/TP/TP_ReJMIC2022)|
+|Travaux pratiques|Noshine Mohammad, Alexandre Godmer|[TP PCA](TP/TP_PCA_UE_2023.Rmd), [en format html](https://agodmer.github.io/UE_ED_Rformation/TP/TP_PCA_UE_2023.html)|
 
 - **Documents pour les cours et TP :**
   - **Introduction à R :** introduction à R; le [notebook version apprenant](TP/TP_intro_R_versionApprenants.Rmd) ; les [données](Data/Snore.txt)
