@@ -1,4 +1,4 @@
-# UE_ED_Rformation
+# UE Intelligence artificielle et médecine
 
 ## Intervenants :
 
@@ -6,7 +6,7 @@
 
 **Dr Alexandre Godmer** (AHU département de bactériologie, site hôpital Saint-Antoine, Doctorant en thèse d'université, Sorbonne-Université, INSERM, U1135, Centre d’Immunologie et des Maladies Infectieuses, [Cimi-Paris](https://cimiparis.fr/), Paris).
 
-
+## Programme :
 |  Cours | Intervenants  | Liens  |
 |---     |---            |---     |
 |Introduction à R|Nohine mohammad|[cours 1](https://agodmer.github.io/StatistiquesR_ReJMICJournee2/Cours/TP_intro_R_versionApprenants.html) [intro_R](Cours/Cours_intro_R.pdf)|
