@@ -10,8 +10,8 @@
 |  Cours | Intervenants  | Liens  |
 |---     |---            |---     |
 |Introduction à R|Nohine mohammad|[cours 1](https://agodmer.github.io/StatistiquesR_ReJMICJournee2/Cours/TP_intro_R_versionApprenants.html) [intro_R](Cours/Cours_intro_R.pdf)|
-| Decouverte de l'analyse en composantes principales|Alexandre Godmer|[cours 2](Cours/AlexGodmer_cours_PCA.pdf)|   
-|Travaux pratiques|Noshine Mohammad, Alexandre Godmer|[cours 3](TP/TP_ReJMIC2022.Rmd)|
+|Decouverte de l'analyse en composantes principales|Alexandre Godmer|[cours 2](Cours/AlexGodmer_cours_PCA.pdf)|   
+|Travaux pratiques|Noshine Mohammad, Alexandre Godmer|[cours 3](TP/TP_ReJMIC2022.Rmd), [en format html](https://agodmer.github.io/StatistiquesR_ReJMICJournee2/Cours/TP_ReJMIC2022)|
 
 - **Documents pour les cours et TP :**
   - **Cours 3 :** introduction à R; le [notebook version apprenant](TP/TP_intro_R_versionApprenants.Rmd) ; les [données](Data/Snore.txt)
