@@ -1,6 +1,6 @@
 ---
-title: "Tp Rejmic"
-author: "ReJMIC (N. Mohammad, A. Godmer)"
+title: "TP PCA : Analyse par composante principale"
+author: "A. Godmer, N. Mohammad"
 date: '`r Sys.Date()`'
 output: 
   html_document:

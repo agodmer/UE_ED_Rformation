@@ -1,6 +1,6 @@
 ---
-title: "Tp introduction à R"
-author: "ReJMIC (N. Mohammad, A. Godmer)"
+title: "TP introduction à R"
+author: "N. Mohammad, A. Godmer"
 date: '`r Sys.Date()`'
 output: html_document
 ---
